@@ -7,12 +7,112 @@ import time
 start_time= time.time()
 question= "What is " + str(num1) + " times " + str(num2) + "?"
 print (question)
+answer=int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("Sorry that isnt correct")
+num1= randint(1,10)
+num2= randint(1,10)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
 answer= int(input("Enter a number: "))
 if answer== (num1 * num2):
   print("That is correct!")
   right=right+1
 if answer!= (num1 * num2):
   print("Sorry that isnt correct")
+  num1=randint(1,10)
+num2= randint(1,10)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!=(num1 * num2):
+  print("sorry that is incorrect")
+num1= randint(1,10)
+num2= randint(1,10)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("Sorry that isnt correct")
+  num1=randint(1,10)
+num2= randint(1,10)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("sorry that is incorrect")
+num1= randint(1,10)
+num2= randint(1,10)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("Sorry that isnt correct")
+  num1=randint(1,10)
+num2= randint(7,15)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("sorry that is incorrect")
+num1= randint(5,15)
+num2= randint(1,10)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("Sorry that isnt correct")
+  num1=randint(4,15)
+num2= randint(1,10)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("sorry that is incorrect")
+num1= randint(1,10)
+num2= randint(3,15)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("Sorry that isnt correct")
+  num1=randint(1,10)
+num2= randint(2,15)
+question= "What is " + str(num1) + " times " + str(num2) + "?"
+print (question)
+answer= int(input("Enter a number: "))
+if answer== (num1 * num2):
+  print("That is correct!")
+  right=right+1
+if answer!= (num1 * num2):
+  print("sorry that is incorrect")
 end_time= time.time()
 total_time=end_time-start_time
 print("Your total time was " + str(total_time))
