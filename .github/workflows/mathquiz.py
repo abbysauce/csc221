@@ -9,5 +9,6 @@ question= "What is " + str(num1) + " times " + str(num2) + "?"
 print (question)
 answer= int(input("Enter a number: "))
 if answer== (num1 * num2):
-    print("That is correct!")
-   right=right+2
+  print("That is correct!")
+  right=right+1
+
