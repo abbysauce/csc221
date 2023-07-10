@@ -11,4 +11,7 @@ answer= int(input("Enter a number: "))
 if answer== (num1 * num2):
   print("That is correct!")
   right=right+1
+if answer!= (num1 * num2):
+  print("Sorry that isnt correct")
+
 
