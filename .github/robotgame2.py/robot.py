@@ -9,15 +9,23 @@ def place_player():
     print("Here I am!")
 
 def move_player():
-    print("I'm moving...")
-    update_when('Key_pressed')
+    global player_x, player_y, player_shape
 
+    key = update_when ('key_pressed')
+
+    if key == '6' and player_x < 63:
+        player_x += 1
+    elif key == '3':
+        if player_x < 63:
+            player_x += 1
+        if player_y >0:
+            player_y -= 1
+    print("I'm moving...")
 
 begin_graphics()
 finished = False
 
 place_player()
-
 
 while not finished:
     move_player()
