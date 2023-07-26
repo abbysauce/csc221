@@ -1,5 +1,6 @@
 from gasp import *
 from random import randint
+from time import sleep
 
 def place_robot():
     global robot_x, robot_y, robot_shape
@@ -66,6 +67,15 @@ def move_robot():
         robot_x += 1
     move_to(robot_shape, (10 * robot_x, 10 * robot_y))
 
+def check_collisions():
+    global finished
+    if robot_x== player_x and robot_y == player_y:
+        Text("You've been caught!", (100,100), size= 15)
+        sleep(3)
+        finished = True
+
+
+
 begin_graphics()
 finished = False
 
@@ -76,6 +86,8 @@ place_player()
 move_player()
 
 move_robot()
+
+check_collisions()
 
 while not finished:
     move_player()
