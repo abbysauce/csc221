@@ -1,6 +1,11 @@
 from gasp import *
 from random import randint
 
+def place_robot():
+    global robot_x, robot_y, robot_shape
+
+    robot_x, robot_y = randint(0,63), randint(0,47)
+    robot_shape = Box((10 * robot_x + 5, 10 * robot_y +5), 12, 12, filled=True, color = color.HOTPINK, thickness= 1)
 
 def place_player():
     global player_x, player_y, player_shape
@@ -22,18 +27,59 @@ def move_player():
             player_x += 1
         if player_y >0:
             player_y -= 1
+    elif key== 'z':
+        if player_x < 63:
+            player_x -= 1
+        if player_y > 0:
+            player_y -=1
+    elif key == 'e' :
+        if player_x<63:
+            player_x += 1
+        if player_y >0 :
+            player_y += 1
+    elif key == 'a':
+        if player_x < 63 :
+            player_x = player_x - 1
+    elif key == 's':
+        if player_y > 0:
+            player_y = player_y + 1
+    elif key == 'x':
+        if player_y > 0:
+            player_y = player_y - 1
+    elif key == 'q' :
+        if player_x<63:
+            player_x -= 1
+        if player_y >0 :
+            player_y += 1
+
     move_to(player_shape, (10 * player_x + 5, 10 * player_y +5))
-    
+
+def move_robot():
+    global robot_x, robot_y, robot_shape
+    if robot_y > player_y:
+        robot_y -= 1
+    if robot_y < player_y:
+        robot_y += 1
+    if robot_x > player_x:
+        robot_x -= 1
+    if robot_x < player_x:
+        robot_x += 1
+    move_to(robot_shape, (10 * robot_x, 10 * robot_y))
 
 begin_graphics()
 finished = False
+
+place_robot()
 
 place_player()
 
 move_player()
 
+move_robot()
+
 while not finished:
     move_player()
+    move_robot()
 
 end_graphics()
  
