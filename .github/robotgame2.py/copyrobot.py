@@ -7,12 +7,13 @@ class Player:
 class Robot:
     pass
 
-def place_robot():
+def place_robots():
     global robots
     robots= []
 
-    while len(robots) < numbots:
+    while len(robots) > numbots:
         robot = Robot()
+        robot.junk= False
         robot.x = randint(0, 63)
         robot.y = randint(0, 47)
         if not collided(robot, robots): 
@@ -28,6 +29,7 @@ def place_player():
     player.x = randint(0, 63)
     player.y = randint(0, 47)
     
+    
 
 def safely_place_player ():
     place_player()
@@ -40,12 +42,12 @@ def safely_place_player ():
 def move_player():
     global player
 
-    key = update_when ('key_pressed')
+    key = update_when ("key_pressed")
 
     if key == 't':
       remove_from_screen(player.shape)
       safely_place_player()
-      key = update_when('key_pressed')
+      key = update_when("key_pressed")
 
     if key == 'd' and player.x < 63:
         player.x += 1
@@ -78,8 +80,7 @@ def move_player():
             player.x -= 1
         if player.y >0 :
             player.y += 1
-
-    move_to(player.shape, (10 * player.x + 5, 10 * player.y +5))
+    move_to(player.shape,(10 * player.x + 5, 10 * player.y +5))
 
 def move_robot():
     global robots
@@ -94,6 +95,12 @@ def move_robot():
         robot.x += 1
     move_to(robot.shape, (10 * robot.x, 10 * robot.y))
 
+def collided(thing1, list_of_things):
+    for thing2 in list_of_things:
+        if thing1.x == thing2.x and thing1.y == thing2.y:
+            return True
+    return False
+
 def check_collisions():
     global finished, robots
     if collided (player,robots):
@@ -101,11 +108,7 @@ def check_collisions():
         sleep(2)
         finished = True
 
-def collided(thing1, list_of_things):
-    for thing2 in list_of_things:
-        if thing1.x == thing2.x and thing1.y == thing2.y:
-            return True
-    return False
+
 
 
 
@@ -113,13 +116,9 @@ begin_graphics()
 finished = False
 numbots=10
 
-place_robot()
+place_robots()
 
-place_player()
-
-move_player()
-
-move_robot()
+safely_place_player()
 
 check_collisions()
 
