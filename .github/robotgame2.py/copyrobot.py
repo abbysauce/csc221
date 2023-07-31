@@ -8,11 +8,18 @@ class Robot:
     pass
 
 def place_robot():
-    global robot
-    robot= Robot()
+    global robots
+    robots= []
 
-    robot.x, robot.y = randint(0,63), randint(0,47)
-    robot.shape = Box((10 * robot.x + 5, 10 * robot.y +5), 12, 12, filled=True, color = color.BLUE, thickness= 1)
+    while len(robots) < numbots:
+        robot = Robot()
+        robot.x = randint(0, 63)
+        robot.y = randint(0, 47)
+        if not collided(robot, robots): 
+            robot.shape = Box((10 * robot.x + 5, 10 * robot.y +5), 12, 12, filled=True, color = color.BLUE, thickness= 1)
+            robots.append(robot)
+
+  
 
 def place_player():
     global player
@@ -20,13 +27,14 @@ def place_player():
 
     player.x = randint(0, 63)
     player.y = randint(0, 47)
-    player.shape = Circle((10 * player.x + 5, 10 * player.y +5), 5, filled=True, color = color.DEEPPINK, thickness = 3 )
     
 
 def safely_place_player ():
     place_player()
-    while player.x != robot.x and player.y != robot.y:
+    while collided (player,robots):
         place_player()
+    player.shape = Circle((10 * player.x + 5, 10 * player.y +5), 5, filled=True, color = color.DEEPPINK, thickness = 3 )
+    
 
 
 def move_player():
@@ -74,28 +82,36 @@ def move_player():
     move_to(player.shape, (10 * player.x + 5, 10 * player.y +5))
 
 def move_robot():
-    global robot
-    if robot.y > player.y:
+    global robots
+    for robot in robots:
+      if robot.y > player.y:
         robot.y -= 1
-    if robot.y < player.y:
+      if robot.y < player.y:
         robot.y += 1
-    if robot.x > player.x:
+      if robot.x > player.x:
         robot.x -= 1
-    if robot.x < player.x:
+      if robot.x < player.x:
         robot.x += 1
     move_to(robot.shape, (10 * robot.x, 10 * robot.y))
 
 def check_collisions():
-    global finished
-    if robot.x== player.x and robot.y == player.y:
+    global finished, robots
+    if collided (player,robots):
         Text("You've been caught!", (300,200), size= 30, color=color.HOTPINK)
         sleep(2)
         finished = True
+
+def collided(thing1, list_of_things):
+    for thing2 in list_of_things:
+        if thing1.x == thing2.x and thing1.y == thing2.y:
+            return True
+    return False
 
 
 
 begin_graphics()
 finished = False
+numbots=10
 
 place_robot()
 
