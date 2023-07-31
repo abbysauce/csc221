@@ -2,85 +2,92 @@ from gasp import *
 from random import randint
 from time import sleep
 
-def place_robot():
-    global robot_x, robot_y, robot_shape
+class Player:
+    pass
+class Robot:
+    pass
 
-    robot_x, robot_y = randint(0,63), randint(0,47)
-    robot_shape = Box((10 * robot_x + 5, 10 * robot_y +5), 12, 12, filled=True, color = color.BLUE, thickness= 1)
+def place_robot():
+    global robot
+    robot= Robot()
+
+    robot.x, robot.y = randint(0,63), randint(0,47)
+    robot.shape = Box((10 * robot.x + 5, 10 * robot.y +5), 12, 12, filled=True, color = color.BLUE, thickness= 1)
 
 def place_player():
-    global player_x, player_y, player_shape
+    global player
+    player= Player()
 
-    player_x = randint(0, 63)
-    player_y = randint(0, 47)
-    player_shape = Circle((10 * player_x + 5, 10 * player_y +5), 5, filled=True, color = color.DEEPPINK, thickness = 3 )
+    player.x = randint(0, 63)
+    player.y = randint(0, 47)
+    player.shape = Circle((10 * player.x + 5, 10 * player.y +5), 5, filled=True, color = color.DEEPPINK, thickness = 3 )
     
 
 def safely_place_player ():
     place_player()
-    while player_x != robot_x and player_y != robot_y:
+    while player.x != robot.x and player.y != robot.y:
         place_player()
 
 
 def move_player():
-    global player_x, player_y, player_shape
+    global player
 
     key = update_when ('key_pressed')
 
     if key == 't':
-      remove_from_screen(player_shape)
+      remove_from_screen(player.shape)
       safely_place_player()
       key = update_when('key_pressed')
 
-    if key == 'd' and player_x < 63:
-        player_x += 1
+    if key == 'd' and player.x < 63:
+        player.x += 1
     elif key == 'c':
-        if player_x < 63:
-            player_x += 1
-        if player_y >0:
-            player_y -= 1
+        if player.x < 63:
+            player.x += 1
+        if player.y >0:
+            player.y -= 1
     elif key== 'z':
-        if player_x < 63:
-            player_x -= 1
-        if player_y > 0:
-            player_y -=1
+        if player.x < 63:
+            player.x -= 1
+        if player.y > 0:
+            player.y -=1
     elif key == 'e' :
-        if player_x<63:
-            player_x += 1
-        if player_y >0 :
-            player_y += 1
+        if player.x<63:
+            player.x += 1
+        if player.y >0 :
+            player.y += 1
     elif key == 'a':
-        if player_x < 63 :
-            player_x = player_x - 1
+        if player.x < 63 :
+            player.x = player.x - 1
     elif key == 's':
-        if player_y > 0:
-            player_y = player_y + 1
+        if player.y > 0:
+            player.y = player.y + 1
     elif key == 'x':
-        if player_y > 0:
-            player_y = player_y - 1
+        if player.y > 0:
+            player.y = player.y - 1
     elif key == 'q' :
-        if player_x<63:
-            player_x -= 1
-        if player_y >0 :
-            player_y += 1
+        if player.x<63:
+            player.x -= 1
+        if player.y >0 :
+            player.y += 1
 
-    move_to(player_shape, (10 * player_x + 5, 10 * player_y +5))
+    move_to(player.shape, (10 * player.x + 5, 10 * player.y +5))
 
 def move_robot():
-    global robot_x, robot_y, robot_shape
-    if robot_y > player_y:
-        robot_y -= 1
-    if robot_y < player_y:
-        robot_y += 1
-    if robot_x > player_x:
-        robot_x -= 1
-    if robot_x < player_x:
-        robot_x += 1
-    move_to(robot_shape, (10 * robot_x, 10 * robot_y))
+    global robot
+    if robot.y > player.y:
+        robot.y -= 1
+    if robot.y < player.y:
+        robot.y += 1
+    if robot.x > player.x:
+        robot.x -= 1
+    if robot.x < player.x:
+        robot.x += 1
+    move_to(robot.shape, (10 * robot.x, 10 * robot.y))
 
 def check_collisions():
     global finished
-    if robot_x== player_x and robot_y == player_y:
+    if robot.x== player.x and robot.y == player.y:
         Text("You've been caught!", (300,200), size= 30, color=color.HOTPINK)
         sleep(2)
         finished = True
