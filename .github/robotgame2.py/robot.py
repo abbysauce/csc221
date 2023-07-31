@@ -6,14 +6,20 @@ def place_robot():
     global robot_x, robot_y, robot_shape
 
     robot_x, robot_y = randint(0,63), randint(0,47)
-    robot_shape = Box((10 * robot_x + 5, 10 * robot_y +5), 12, 12, filled=True, color = color.HOTPINK, thickness= 1)
+    robot_shape = Box((10 * robot_x + 5, 10 * robot_y +5), 12, 12, filled=True, color = color.BLUE, thickness= 1)
 
 def place_player():
     global player_x, player_y, player_shape
 
     player_x = randint(0, 63)
     player_y = randint(0, 47)
-    player_shape = Circle((10 * player_x + 5, 10 * player_y +5), 5, filled=True)
+    player_shape = Circle((10 * player_x + 5, 10 * player_y +5), 5, filled=True, color = color.DEEPPINK, thickness = 3 )
+    
+
+def safely_place_player ():
+    place_player()
+    while player_x != robot_x and player_y != robot_y:
+        place_player()
 
 
 def move_player():
@@ -70,8 +76,8 @@ def move_robot():
 def check_collisions():
     global finished
     if robot_x== player_x and robot_y == player_y:
-        Text("You've been caught!", (100,100), size= 15)
-        sleep(3)
+        Text("You've been caught!", (300,200), size= 30, color=color.HOTPINK)
+        sleep(2)
         finished = True
 
 
@@ -92,6 +98,7 @@ check_collisions()
 while not finished:
     move_player()
     move_robot()
+    check_collisions()
 
 end_graphics()
  
