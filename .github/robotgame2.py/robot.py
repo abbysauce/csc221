@@ -27,6 +27,11 @@ def move_player():
 
     key = update_when ('key_pressed')
 
+    if key == 't':
+      remove_from_screen(player_shape)
+      safely_place_player()
+      key = update_when('key_pressed')
+
     if key == 'd' and player_x < 63:
         player_x += 1
     elif key == 'c':
